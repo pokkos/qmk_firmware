@@ -199,6 +199,9 @@ bool shutdown_user(bool jump_to_bootloader) {
     return true;
 }
 
+layer_state_t layer_state_set_user(layer_state_t state) {
+  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
 
 #ifndef OLED_LOGO_TIMEOUT
     #define OLED_LOGO_TIMEOUT 5000
