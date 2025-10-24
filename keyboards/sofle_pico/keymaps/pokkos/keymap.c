@@ -4,11 +4,13 @@
 #include <stdint.h>
 #include "action_layer.h"
 #include "action_util.h"
+#include "color.h"
 #include "host.h"
 #include "keyboard.h"
 #include "modifiers.h"
 #include "oled_driver.h"
 #include "quantum.h"
+#include "rgb_matrix.h"
 #include QMK_KEYBOARD_H
 
 #ifdef OLED_ENABLE
@@ -158,6 +160,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         current_key = keycode;
     }
+    return true;
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    uint8_t layer = get_highest_layer(layer_state);
+
+    for (uint8_t i = led_min; i < led_max; i++) {
+        switch (layer) {
+            case _COLEMAK_DH:
+                rgb_matrix_set_color(i, RGB_BLUE);
+                break;
+            case _QWERTY:
+                rgb_matrix_set_color(i, RGB_GOLD);
+                break;
+            case _LOWER:
+                rgb_matrix_set_color(i, RGB_MAGENTA);
+                break;
+            case _RAISE:
+                rgb_matrix_set_color(i, RGB_GREEN);
+                break;
+            case _ADJUST:
+                rgb_matrix_set_color(i, RGB_RED);
+                break;
+            default:
+                rgb_matrix_set_color(i, RGB_WHITE);
+                break;
+        }
+    }
+
     return true;
 }
 
