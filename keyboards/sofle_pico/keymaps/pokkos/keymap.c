@@ -18,6 +18,9 @@
     static void render_left(void);
     static void oled_render_boot(bool bootloader);
 #endif
+
+static uint16_t current_key;
+
 enum sofle_layers {
     _COLEMAK_DH,
     _QWERTY,
@@ -150,6 +153,13 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [3] = {ENCODER_CCW_CW(_______, _______)},
 };
 #endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        current_key = keycode;
+    }
+    return true;
+}
 
 bool shutdown_user(bool jump_to_bootloader) {
     #ifdef OLED_ENABLE
