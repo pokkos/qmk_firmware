@@ -288,7 +288,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         /* print base layer */
         switch (get_highest_layer(default_layer_state)) {
             case _COLEMAK_DH:
-                oled_write_ln_P(PSTR("COLEMAK_DH"), false);
+                oled_write_P(PSTR("COLEMAK_DH"), false); //no newline as the line is full with 10 chars
                 break;
             case _QWERTY:
                 oled_write_ln_P(PSTR("QWERTY"), false);
