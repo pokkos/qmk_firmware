@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                          KC_J,    KC_L,    KC_U,    KC_Y,   KC_SCLN, KC_BSPC,
         KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                          KC_M,    KC_N,    KC_E,    KC_I,   KC_O,    KC_QUOT,
         KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,     XXXXXXX, KC_K,    KC_H,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-                          MO(_RAISE), KC_LALT, KC_LCTL, MO(_LOWER), KC_SPC,      KC_ENT , MO(_RAISE),  KC_RCTL, KC_RALT, KC_RGUI
+                          MO(_RAISE), KC_LALT, KC_LCTL, MO(_LOWER), KC_SPC,      KC_ENT , MO(_RAISE),  KC_RCTL, KC_RALT, KC_RGUI // TEMP: be able to switch layers with one side
                           // KC_LGUI, KC_LALT, KC_LCTL, MO(_LOWER), KC_SPC,      KC_ENT , MO(_RAISE),  KC_RCTL, KC_RALT, KC_RGUI
         ),
 
@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * | Esc  | Ins  | Pscr | Menu |      |      |                    |      | PWrd |  Up  | NWrd | DLine| Bspc |
         * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
         * | Tab  | LAt  | LCtl |LShift|      | Caps |-------.    ,-------|      | Left | Down | Rigth|  Del | Bspc |
-        * |------+------+------+------+------+------|  MUTE  |    |       |------+------+------+------+------+------|
+        * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
         * |Shift | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      | Shift|
         * `-----------------------------------------/       /     \      \-----------------------------------------'
         *            |      |      |      |      | /       /       \      \  |      |      |      |      |
@@ -132,21 +132,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         /* ADJUST
         * ,-----------------------------------------.                    ,-----------------------------------------.
-        * |COLEMK|QWERTY|      |      |      |      |                    |      |      |      |      |      |      |
+        * |COLEMK|QWERTY|      |      |      |QK_BOT|                    |      |      |      |      |      |      |
         * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-        * |QK_BOT|      |      |      |      |      |                    |      |      |      |      |      |      |
+        * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
         * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
         * |      |      |      |      |      |      |-------.    ,-------|      | VOLDO| MUTE | VOLUP|      |      |
-        * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+        * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
         * |      |      |      |      |      |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
         * `-----------------------------------------/       /     \      \-----------------------------------------'
-        *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+        *            |      |      |      |      | /       /       \      \  |      |      |      |      |
         *            |      |      |      |      |/       /         \      \ |      |      |      |      |
         *            `----------------------------------'           '------''---------------------------'
         */
         [_ADJUST] = LAYOUT(
-        KC_COLE, KC_QWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        KC_COLE, KC_QWER, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                           _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
@@ -281,9 +281,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
     static void render_left(void) {
         /* Print current mode */
-        // oled_write_P(PSTR("\n"), false);
         oled_write_ln_P(PSTR("Base"), false);
-        // oled_write_ln_P(PSTR(""), false);
 
         /* print base layer */
         switch (get_highest_layer(default_layer_state)) {
