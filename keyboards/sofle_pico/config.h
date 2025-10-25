@@ -10,6 +10,8 @@
 /* Swap TX and RX pins if keyboard is master half. Only available on some MCU's. This _is_ available on the RP2040 */
 #define SERIAL_USART_PIN_SWAP
 
+#define TAPPING_TERM_PER_KEY
+
 /* I2C for OLEDs */
 #define I2C_DRIVER I2CD1
 #define I2C1_SDA_PIN GP6
