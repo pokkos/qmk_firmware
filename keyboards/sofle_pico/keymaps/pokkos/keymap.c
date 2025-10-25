@@ -196,7 +196,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, RGB_GOLD);
                 break;
             case _LOWER:
-                rgb_matrix_set_color(i, RGB_MAGENTA);
+                rgb_matrix_set_color(i, RGB_PURPLE);
                 break;
             case _RAISE:
                 rgb_matrix_set_color(i, RGB_GREEN);
