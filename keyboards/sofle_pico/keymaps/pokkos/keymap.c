@@ -7,6 +7,7 @@
 #include "color.h"
 #include "host.h"
 #include "keyboard.h"
+#include "keycodes.h"
 #include "modifiers.h"
 #include "oled_driver.h"
 #include "quantum.h"
@@ -36,6 +37,14 @@ enum custom_keycodes {
     KC_QWER
 };
 
+enum tapdance_keys {
+    TD_LALT_RALT,
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_LALT_RALT] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_RALT),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format off
         /*
@@ -49,8 +58,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
         * |LShift|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
         * `-----------------------------------------/       /     \      \-----------------------------------------'
-        *            | LGUI | LAlt | LCTL-|LOWER | / Space /       \Enter \  |RAISE |Shift-| RAlt | RGUI |
-        *            |      |      | ESC  |      |/       /         \      \ |      |TAB   |      |      |
+        *            | LGUI | LAlt | LCTL-|LOWER | / Space /       \Enter \  |RAISE |Shift-| LAlt-| RGUI |
+        *            |      |      | ESC  |      |/       /         \      \ |      |TAB   | RAlt |      |
         *            `----------------------------------'           '------''---------------------------'
         */
         [_COLEMAK_DH] = LAYOUT(
@@ -58,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                                 KC_J,    KC_L,    KC_U,    KC_Y,   KC_SCLN, KC_BSPC,
         KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                                 KC_M,    KC_N,    KC_E,    KC_I,   KC_O,    KC_QUOT,
         KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,            XXXXXXX, KC_K,    KC_H,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-              MO(_RAISE), KC_LALT, CTL_T(KC_ESC), MO(_LOWER), KC_SPC,      KC_ENT , MO(_RAISE),  SFT_T(KC_TAB), KC_RALT, KC_RGUI
+              MO(_RAISE), KC_LALT, CTL_T(KC_ESC), MO(_LOWER), KC_SPC,      KC_ENT , MO(_RAISE),  SFT_T(KC_TAB), TD(TD_LALT_RALT), KC_RGUI
         ),
 
         /*
