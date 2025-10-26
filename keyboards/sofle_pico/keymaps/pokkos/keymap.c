@@ -188,28 +188,22 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     for (uint8_t i = led_min; i < led_max; i++) {
         switch (layer) {
-            case _COLEMAK_DH:
-                rgb_matrix_set_color(i, RGB_BLUE);
-                break;
             case _QWERTY:
                 rgb_matrix_set_color(i, RGB_GOLD);
                 break;
             case _LOWER:
-                rgb_matrix_set_color(i, RGB_PURPLE);
+                rgb_matrix_set_color(i, RGB_TEAL);
                 break;
             case _RAISE:
-                rgb_matrix_set_color(i, RGB_GREEN);
+                rgb_matrix_set_color(i, RGB_SPRINGGREEN);
                 break;
             case _ADJUST:
-                rgb_matrix_set_color(i, RGB_RED);
-                break;
-            default:
-                rgb_matrix_set_color(i, RGB_WHITE);
+                rgb_matrix_set_color(i, RGB_ORANGE);
                 break;
         }
     }
 
-    return true;
+    return false;
 }
 
 bool shutdown_user(bool jump_to_bootloader) {
