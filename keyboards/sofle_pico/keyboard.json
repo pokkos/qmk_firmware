@@ -129,7 +129,8 @@
     },
     "tags": [ "ortho", "split", "rgb", "encoder", "OLED", "128x64", "tenting_puck" ],
     "tapping": {
-        "term": 210
+        "term": 210,
+        "term_per_key": true
     },
     "url": "https://github.com/JellyTitan/Sofle-Pico",
     "usb": {
