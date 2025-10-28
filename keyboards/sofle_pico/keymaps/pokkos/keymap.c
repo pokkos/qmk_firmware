@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <stdint.h>
+#include "action.h"
 #include "action_layer.h"
 #include "action_tapping.h"
 #include "action_util.h"
@@ -50,6 +51,8 @@ tap_dance_action_t tap_dance_actions[] = {
 #define TH_CTESC CTL_T(KC_ESC)
 #define TH_TDALT TD(TD_LALT_RALT)
 #define TG_ADJST TG(_ADJUST)
+#define L_GUISPC LT(_RAISE,KC_SPC)
+#define L_GUIENT LT(_RAISE,KC_ENT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format off
@@ -77,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_TAB,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                            KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    TG_ADJST,      TG_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      TH_HIGH, KC_LALT, TH_CTESC,TH_LOW,  KC_SPC,        KC_ENT,  TH_HIGH, KC_RSFT, TH_TDALT,KC_RGUI
+                      TH_HIGH, KC_LALT, TH_CTESC,TH_LOW,  L_GUISPC,      L_GUIENT,TH_HIGH, KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
     /*
@@ -197,6 +200,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_default_layer(_QWERTY);
             }
             return false;
+        case L_GUISPC | L_GUIENT:
+            if (record->tap.count == 0) {
+                if (record->event.pressed) {
+                    register_mods(MOD_LGUI);
+                } else {
+                    unregister_mods(MOD_LGUI);
+                }
+            }
+            return true;
     }
 
     return true;
