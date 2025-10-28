@@ -138,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * | Esc  | Ins  | Pscr | Menu |      |      |                    |      | PWrd |  Up  | NWrd | DLine| Bspc |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-    * | Tab  | LAt  | LCtl |LShift|      | Caps |-------.    ,-------|      | Left | Down | Rigth|  Del | Bspc |
+    * | Tab  | LAt  | LCtl |LShift|      | Caps |-------.    ,-------|      | Left | Down | Right|  Del | Bspc |
     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
     * |Shift | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      | Shift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -226,7 +226,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, RGB_TEAL);
                 break;
             case _RAISE:
-                rgb_matrix_set_color(i, RGB_SPRINGGREEN);
+                if (get_mods() & MOD_BIT_LGUI){
+                    rgb_matrix_set_color(i, RGB_PURPLE);
+                } else {
+                    rgb_matrix_set_color(i, RGB_SPRINGGREEN);
+                }
                 break;
             case _ADJUST:
                 rgb_matrix_set_color(i, RGB_RED);
