@@ -200,7 +200,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_default_layer(_QWERTY);
             }
             return false;
-        case L_GUISPC | L_GUIENT:
+        case L_GUISPC:
+        case L_GUIENT:
             if (record->tap.count == 0) {
                 if (record->event.pressed) {
                     register_mods(MOD_LGUI);
