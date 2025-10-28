@@ -34,7 +34,8 @@ enum sofle_layers {
 
 enum custom_keycodes {
     KC_COLE = SAFE_RANGE,
-    KC_QWER
+    KC_QWER,
+    KC_ADJST
 };
 
 enum tapdance_keys {
@@ -61,18 +62,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * | ESC  |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * | Tab  |   A  |   R  |   S  |   T  |   G  |-------.    ,-------|   M  |   N  |   E  |   I  |   O  |  '   |
-    * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+    * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
     * |LShift|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            | LGUI | LAlt | LCTL-|LOWER | / Space /       \Enter \  |RAISE | RSFT | LAlt-| RGUI |
     *            |      |      | ESC  |      |/       /         \      \ |      |      | RAlt |      |
     *            `----------------------------------'           '------''---------------------------'
     */
+    /* TEMPORARY to test only with left side:
+    *     - KC_ADJST on left side
+    *     - TH_HIGH on left side
+    */
     [_COLEMAK_DH] = LAYOUT(
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
     KC_ESC,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_TAB,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                            KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       XXXXXXX, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_ADJST,      KC_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                       TH_HIGH, KC_LALT, TH_CTESC,TH_LOW,  KC_SPC,        KC_ENT,  TH_HIGH, KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
@@ -84,18 +89,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * | ESC  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
-    * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+    * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
     * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            | LGUI | LAlt | LCTL-|LOWER | / Space /       \Enter \  |RAISE | RSFT | LAlt-| RGUI |
     *            |      |      | ESC  |      |/       /         \      \ |      |      | RAlt |      |
     *            `----------------------------------'           '------''---------------------------'
     */
+    /* TEMPORARY to test only with left side:
+    *     - KC_ADJST on left side
+    *     - TH_HIGH on left side
+    */
     [_QWERTY] = LAYOUT(
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
     KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                            KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       XXXXXXX, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_ADJST,      KC_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                       TH_HIGH, KC_LALT, TH_CTESC,TH_LOW,  KC_SPC,        KC_ENT,  TH_HIGH, KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
@@ -150,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |RGB_P |RGB_N |RGB_T |      |      |      |                    |      |      |      |      |      |      |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |      |      |      |      |      |      |-------.    ,-------|      | VOLDO| MUTE | VOLUP|      |      |
-    * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+    * |------+------+------+------+------+------| ADJST |    |       |------+------+------+------+------+------|
     * |      |      |      |      |      |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            |      |      |      |      | /       /       \      \  |      |      |      |      |
@@ -161,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_COLE, KC_QWER, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     RM_PREV, RM_NEXT, RM_TOGG, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ADJST,      XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                       _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
     ),
     // clang-format on
@@ -192,6 +201,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_default_layer(_QWERTY);
             }
             return false;
+        case KC_ADJST:
+            if (!record->event.pressed) {
+                return false;
+            }
+            layer_invert(_ADJUST);
+            return false;
     }
 
     return true;
@@ -212,7 +227,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, RGB_SPRINGGREEN);
                 break;
             case _ADJUST:
-                rgb_matrix_set_color(i, RGB_ORANGE);
+                rgb_matrix_set_color(i, RGB_RED);
                 break;
         }
     }
@@ -227,9 +242,9 @@ bool shutdown_user(bool jump_to_bootloader) {
     return true;
 }
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-}
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+// }
 
 #ifndef OLED_LOGO_TIMEOUT
     #define OLED_LOGO_TIMEOUT 5000
