@@ -338,16 +338,31 @@ bool shutdown_user(bool jump_to_bootloader) {
                 oled_write_ln_P(PSTR("UNDEFINED"), false);
         }
 
-        /* print capslock state */
         oled_write_P(PSTR("\n"), false);
-        led_t led_usb_state = host_keyboard_led_state();
-        oled_write_ln_P(PSTR("Capslock"), led_usb_state.caps_lock);
 
-        render_right();
+        if (IS_LAYER_OFF(_ADJUST)) {
+            render_right();
+        } else {
+            char buffer[12];
+            sprintf(buffer, "DT: %d", g_tapping_term);
+            oled_write_ln_P(PSTR(buffer), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+        }
+
     }
 
     static void render_right(void) {
         uint8_t current_mods = get_mods();
+        /* print capslock state */
+        led_t led_usb_state = host_keyboard_led_state();
+        oled_write_ln_P(PSTR("Capslock"), led_usb_state.caps_lock);
 
         oled_write_ln("L SHIFT", (current_mods & MOD_BIT_LSHIFT));
         oled_write_ln("R SHIFT", (current_mods & MOD_BIT_RSHIFT));
