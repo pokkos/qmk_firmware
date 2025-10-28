@@ -22,8 +22,6 @@
     static void oled_render_boot(bool bootloader);
 #endif
 
-static uint16_t current_key;
-
 enum sofle_layers {
     _COLEMAK_DH,
     _QWERTY,
@@ -186,10 +184,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        current_key = keycode;
-    }
-
     switch (keycode) {
         case KC_COLE:
             if (record->event.pressed) {
@@ -241,7 +235,7 @@ bool shutdown_user(bool jump_to_bootloader) {
 // }
 
 #ifndef OLED_LOGO_TIMEOUT
-    #define OLED_LOGO_TIMEOUT 5000
+    #define OLED_LOGO_TIMEOUT 3000
 #endif
 
 #ifdef OLED_ENABLE
@@ -257,7 +251,7 @@ bool shutdown_user(bool jump_to_bootloader) {
         if ((timer_elapsed(startup_timer) < OLED_LOGO_TIMEOUT) && !finished_logo) {
             /* Display the logo on startup */
             if (is_keyboard_master()) {
-                render_right();
+                render_logo();
                 /* Adding text below the partial screen logo requires oled_set_cursor. There are 10 chars per line. Subsequent oled_set_cursor simplifies line wraps. */
                 oled_set_cursor(0, 12);
                 oled_write_ln_P(PSTR("v3.5.4"), false);
@@ -312,7 +306,7 @@ bool shutdown_user(bool jump_to_bootloader) {
                 break;
         }
 
-        oled_write_P(PSTR("\n\n"), false);
+        oled_write_P(PSTR("\n"), false);
 
         /* print current layer */
         oled_write_ln_P(PSTR("Layer"), false);
@@ -336,45 +330,24 @@ bool shutdown_user(bool jump_to_bootloader) {
         }
 
         /* print capslock state */
-        oled_write_P(PSTR("\n\n"), false);
+        oled_write_P(PSTR("\n"), false);
         led_t led_usb_state = host_keyboard_led_state();
         oled_write_ln_P(PSTR("Capslock"), led_usb_state.caps_lock);
 
-        /* print last pressed key */
-        char buffer[32];
-        sprintf(buffer, "key: %d", current_key);
-        oled_write_P(PSTR("\n\n"), false);
-        oled_write_P(PSTR(buffer), false);
+        render_right();
     }
 
     static void render_right(void) {
-        oled_write_P(PSTR("\n\n"), false);
-
         uint8_t current_mods = get_mods();
-        if (current_mods & MOD_BIT_LSHIFT) {
-            oled_write_ln("Left SHIFT", false);
-        }
-        if (current_mods & MOD_BIT_RSHIFT) {
-            oled_write_ln("Right SHIFT", false);
-        }
-        if (current_mods & MOD_BIT_LCTRL) {
-            oled_write_ln("Left CTRL", false);
-        }
-        if (current_mods & MOD_BIT_RCTRL) {
-            oled_write_ln("Right CTRL", false);
-        }
-        if (current_mods & MOD_BIT_LALT) {
-            oled_write_ln("Left ALT", false);
-        }
-        if (current_mods & MOD_BIT_RALT) {
-            oled_write_ln("Right ALT", false);
-        }
-        if (current_mods & MOD_BIT_LGUI) {
-            oled_write_ln("Left GUI", false);
-        }
-        if (current_mods & MOD_BIT_RGUI) {
-            oled_write_ln("Right GUI", false);
-        }
+
+        oled_write_ln("L SHIFT", (current_mods & MOD_BIT_LSHIFT));
+        oled_write_ln("R SHIFT", (current_mods & MOD_BIT_RSHIFT));
+        oled_write_ln("L CTRL", (current_mods & MOD_BIT_LCTRL));
+        oled_write_ln("R CTRL", (current_mods & MOD_BIT_RCTRL));
+        oled_write_ln("L ALT", (current_mods & MOD_BIT_LALT));
+        oled_write_ln("R ALT", (current_mods & MOD_BIT_RALT));
+        oled_write_ln("L GUI", (current_mods & MOD_BIT_LGUI));
+        oled_write_ln("R GUI", (current_mods & MOD_BIT_RGUI));
     }
 
     // static void render_qmk_logo(void) {
