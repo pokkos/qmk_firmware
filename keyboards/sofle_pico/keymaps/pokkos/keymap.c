@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "action_layer.h"
+#include "action_tapping.h"
 #include "action_util.h"
 #include "color.h"
 #include "host.h"
@@ -176,10 +177,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [0] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [1] = {ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
-    [2] = {ENCODER_CCW_CW(_______, _______)},
-    [3] = {ENCODER_CCW_CW(_______, _______)},
+    [_COLEMAK_DH] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [_LOWER] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
+    [_RAISE] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
+    [_ADJUST] = { ENCODER_CCW_CW(DT_DOWN, DT_UP), ENCODER_CCW_CW(DT_DOWN, DT_UP) },
 };
 #endif
 
@@ -221,6 +223,13 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 
     return false;
+}
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        default:
+            return g_tapping_term;
+    }
 }
 
 bool shutdown_user(bool jump_to_bootloader) {
