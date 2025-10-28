@@ -134,23 +134,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* RAISE
     * ,----------------------------------------.                    ,-----------------------------------------.
-    * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+    * | PrtSc|      |      |      |      |      |                    | Play |      |      |      |      |      |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-    * | Esc  | Ins  | Pscr | Menu |      |      |                    |      | PWrd |  Up  | NWrd | DLine| Bspc |
+    * | Esc  |      |      | Menu |      |      |                    | PgUp | Home |      |      |      | Ins  |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-    * | Tab  | LAt  | LCtl |LShift|      | Caps |-------.    ,-------|      | Left | Down | Right|  Del | Bspc |
+    * | Tab  |      |      |      |LShift|      |-------.    ,-------| Left |  Up  | Down | Right| Bspc | Del  |
     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
-    * |Shift | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      | Shift|
+    * | Caps | Undo |  Cut | Copy | Paste|      |-------|    |-------| PgDwn| End  |      |      |      |      |
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            |      |      |      |      | /       /       \      \  |      |      |      |      |
     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
     *            `----------------------------------'           '------''---------------------------'
     */
     [_RAISE] = LAYOUT(
-    _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______,
-    _______, KC_INS,  KC_PSCR, KC_APP,  XXXXXXX, XXXXXXX,                         KC_PGUP, XXXXXXX, KC_UP  , XXXXXXX, XXXXXXX, KC_BSPC,
-    _______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, KC_CAPS,                         KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL , KC_BSPC,
-    _______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______,       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+    KC_PSCR, _______, _______, _______, _______, _______,                         KC_MPLY, _______, _______, _______, _______, _______,
+    _______, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX,                         KC_PGUP, KC_HOME, XXXXXXX, XXXXXXX, XXXXXXX, KC_INS,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT, XXXXXXX,                         KC_LEFT, KC_UP,   KC_DOWN, KC_RGHT, KC_BSPC, KC_DEL,
+    KC_CAPS, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______,       _______, KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX, _______,
                       _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
     ),
 
