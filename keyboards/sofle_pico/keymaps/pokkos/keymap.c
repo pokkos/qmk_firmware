@@ -53,12 +53,22 @@ tap_dance_action_t tap_dance_actions[] = {
 #define TG_ADJST TG(_ADJUST)
 #define L_GUISPC LT(_RAISE,KC_SPC)
 #define L_GUIENT LT(_RAISE,KC_ENT)
+
+// home row mods for ColemakDH
+#define MT_R_ALT LALT_T(KC_R)
+#define MT_S_CTL LCTL_T(KC_S)
 #define MT_T_SFT LSFT_T(KC_T)
 #define MT_N_SFT RSFT_T(KC_N)
-#define MT_S_CTL LCTL_T(KC_S)
 #define MT_E_CTL RCTL_T(KC_E)
-#define MT_R_ALT LALT_T(KC_R)
 #define MT_I_ALT LALT_T(KC_I)
+
+// home row mods for qwerty
+#define MT_S_ALT LALT_T(KC_S)
+#define MT_D_CTL LCTL_T(KC_D)
+#define MT_F_SFT LSFT_T(KC_F)
+#define MT_J_SFT RSFT_T(KC_J)
+#define MT_K_CTL RCTL_T(KC_K)
+#define MT_L_ALT LALT_T(KC_L)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format off
@@ -103,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                            KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_ESC,  KC_A,    MT_S_ALT,MT_D_CTL,MT_F_SFT,KC_G,                            KC_H,    MT_J_SFT,MT_K_CTL,MT_L_ALT,KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       TG_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                       KC_LGUI, KC_LALT, TH_CTESC,TH_LOW,  KC_SPC,        KC_ENT,  TH_HIGH, KC_RSFT, TH_TDALT,KC_RGUI
     ),
