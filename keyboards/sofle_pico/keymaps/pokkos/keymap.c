@@ -54,7 +54,7 @@ tap_dance_action_t tap_dance_actions[] = {
 #define L_GUISPC LT(_RAISE,KC_SPC)
 #define L_GUIENT LT(_RAISE,KC_ENT)
 #define MT_T_SFT LSFT_T(KC_T)
-#define MT_N_SFT LSFT_T(KC_N)
+#define MT_N_SFT RSFT_T(KC_N)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format off
