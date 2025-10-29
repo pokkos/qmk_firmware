@@ -134,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* RAISE
     * ,----------------------------------------.                    ,-----------------------------------------.
-    * | PrtSc|      |      |      |      |      |                    | Play |      |      |      |      |      |
+    * | PrtSc| Calc |      |      |      |      |                    | Play |      |      |      |      |      |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * | Esc  |      |      | Menu |      |      |                    | PgUp | Home |      |      |      | Ins  |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -147,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *            `----------------------------------'           '------''---------------------------'
     */
     [_RAISE] = LAYOUT(
-    KC_PSCR, _______, _______, _______, _______, _______,                         KC_MPLY, _______, _______, _______, _______, _______,
+    KC_PSCR, KC_CALC, _______, _______, _______, _______,                         KC_MPLY, _______, _______, _______, _______, _______,
     _______, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX,                         KC_PGUP, KC_HOME, XXXXXXX, XXXXXXX, XXXXXXX, KC_INS,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT, XXXXXXX,                         KC_LEFT, KC_UP,   KC_DOWN, KC_RGHT, KC_BSPC, KC_DEL,
     KC_CAPS, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______,       _______, KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX, _______,
@@ -183,7 +183,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_COLEMAK_DH] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
     [_QWERTY] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
     [_LOWER] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
-    [_RAISE] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(_______, _______) },
+    [_RAISE] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(KC_BRIU, KC_BRID) },
     [_ADJUST] = { ENCODER_CCW_CW(DT_DOWN, DT_UP), ENCODER_CCW_CW(DT_DOWN, DT_UP) },
 };
 #endif
