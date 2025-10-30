@@ -51,6 +51,7 @@ tap_dance_action_t tap_dance_actions[] = {
 #define TG_ADJST TG(_ADJUST)
 #define SPC_GUI LT(_RAISE,KC_SPC)
 #define ENT_GUI LT(_RAISE,KC_ENT)
+#define BSC_SFT RSFT_T(KC_BSPC)
 
 // home row mods for ColemakDH
 #define A_GUI LGUI_T(KC_A)
@@ -85,8 +86,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
     * |CW_TOG|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
-    *            | LGUI | LAlt | LCTL-|Space | / LOWER /       \RAISE \  |Enter | RSFT | LAlt-| RGUI |
-    *            |      |      | ESC  |GUI   |/       /         \       \|GUI   |      | RAlt |      |
+    *            | LGUI | LAlt | LCTL-|Space | / LOWER /       \RAISE \  |Enter | Bspc | LAlt-| RGUI |
+    *            |      |      | ESC  |GUI   |/       /         \       \|GUI   | RSFT | RAlt |      |
     *            `----------------------------------'           '------''---------------------------'
     */
     [_COLEMAK_DH] = LAYOUT(
@@ -94,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_ESC,  A_GUI,   R_ALT,   S_CTL,   T_SFT,   KC_G,                            KC_M,    N_SFT,   E_CTL,   I_ALT,   O_GUI,   KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       TG_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      KC_LGUI, KC_LALT, TH_CTESC,SPC_GUI, TH_LOW,        TH_HIGH, ENT_GUI, KC_RSFT, TH_TDALT,KC_RGUI
+                      KC_LGUI, KC_LALT, TH_CTESC,SPC_GUI, TH_LOW,        TH_HIGH, ENT_GUI, BSC_SFT, TH_TDALT,KC_RGUI
     ),
 
     /*
