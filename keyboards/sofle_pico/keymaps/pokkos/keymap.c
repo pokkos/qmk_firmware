@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
     * |      |      |      |      |   ~  |      |-------|    |-------|      |   <  |   >  |   [  |   ]  |      |
     * `-----------------------------------------/       /     \      \-----------------------------------------'
-    *            |      |      |      |      | /       /       \      \  |      |      |      |      |
+    *            |      |      |      |      | /       /       \ LOCK \  |      |      |      |      |
     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
     *            `----------------------------------'           '------''---------------------------'
     */
@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
     _______, KC_PIPE, KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES,                         KC_UNDS, KC_MINS, KC_EQL,  KC_LCBR, KC_RCBR, _______,
     _______, _______, _______, _______, KC_TILD, _______, _______,       _______, _______, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC, _______,
-                      _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
+                      _______, _______, _______, _______, _______,       QK_LLCK, _______, _______, _______, _______
     ),
 
     /* RAISE
@@ -152,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
     * | Caps | Undo |  Cut | Copy | Paste|      |-------|    |-------| PgDwn| End  |      |      |      |      |
     * `-----------------------------------------/       /     \      \-----------------------------------------'
-    *            |      |      |      |      | /       /       \      \  |      |      |      |      |
+    *            |      |      |      |      | / LOCK  /       \      \  |      |      |      |      |
     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
     *            `----------------------------------'           '------''---------------------------'
     */
@@ -161,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX,                         KC_PGUP, KC_HOME, XXXXXXX, XXXXXXX, XXXXXXX, KC_INS,
     _______, XXXXXXX, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, KC_DEL,
     KC_CAPS, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______,       _______, KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                      _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
+                      _______, _______, _______, _______, QK_LLCK,       _______, _______, _______, _______, _______
     ),
 
     /* ADJUST
@@ -353,13 +353,13 @@ bool shutdown_user(bool jump_to_bootloader) {
                 oled_write_ln_P(PSTR("BASE"), false);
                 break;
             case _RAISE:
-                oled_write_ln_P(PSTR("RAISE"), false);
+                oled_write_ln_P(PSTR("RAISE"), is_layer_locked(_RAISE));
                 break;
             case _LOWER:
-                oled_write_ln_P(PSTR("LOWER"), false);
+                oled_write_ln_P(PSTR("LOWER"), is_layer_locked(_LOWER));
                 break;
             case _ADJUST:
-                oled_write_ln_P(PSTR("ADJUST"), false);
+                oled_write_ln_P(PSTR("ADJUST"), true);
                 break;
             default:
                 oled_write_ln_P(PSTR("UNDEFINED"), false);
