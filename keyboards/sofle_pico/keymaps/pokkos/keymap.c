@@ -33,6 +33,10 @@ enum sofle_layers {
 enum custom_keycodes {
     KC_COLE = SAFE_RANGE,
     KC_QWER,
+    KC_UM_A,
+    KC_UM_O,
+    KC_UM_U,
+    KC_SS,
 };
 
 enum tapdance_keys {
@@ -129,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |      |   |  |   /  |   \  |   +  |   ?  |-------.    ,-------|   _  |   -  |   =  |   {  |   }  |      |
     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
-    * |      |      |      |      |   ~  |      |-------|    |-------|      |   <  |   >  |   [  |   ]  |      |
+    * |   ß  |   ä  |   ö  |   ü  |   ~  |      |-------|    |-------|      |   <  |   >  |   [  |   ]  |      |
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            |      |      |      |      | /       /       \ LOCK \  |      |      |      |      |
     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -139,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                           KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
     _______, KC_PIPE, KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES,                         KC_UNDS, KC_MINS, KC_EQL,  KC_LCBR, KC_RCBR, _______,
-    _______, _______, _______, _______, KC_TILD, _______, _______,       _______, _______, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC, _______,
+    KC_SS,   KC_UM_A, KC_UM_O, KC_UM_U, KC_TILD, _______, _______,       _______, _______, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC, _______,
                       _______, _______, _______, _______, _______,       QK_LLCK, _______, _______, _______, _______
     ),
 
@@ -209,6 +213,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_QWER:
             if (record->event.pressed) {
                 set_single_default_layer(_QWERTY);
+            }
+            return false;
+        case KC_UM_A:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("a"));
+            }
+            return false;
+        case KC_UM_O:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("o"));
+            }
+            return false;
+        case KC_UM_U:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("u"));
+            }
+            return false;
+        case KC_SS:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("s"));
             }
             return false;
     }
