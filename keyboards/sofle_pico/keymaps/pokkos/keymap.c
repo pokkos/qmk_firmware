@@ -81,8 +81,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
     * |CW_TOG|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
-    *            | LGUI | LAlt | LCTL-|LOWER | / Space /       \Enter \  |RAISE | RSFT | LAlt-| RGUI |
-    *            |      |      | ESC  |      |/GUI_Rai/         \GUI_Rai\|      |      | RAlt |      |
+    *            | LGUI | LAlt | LCTL-|Space | / LOWER /       \RAISE \  |Enter | RSFT | LAlt-| RGUI |
+    *            |      |      | ESC  |GUI_R |/       /         \       \|GUI_R |      | RAlt |      |
     *            `----------------------------------'           '------''---------------------------'
     */
     [_COLEMAK_DH] = LAYOUT(
@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_ESC,  KC_A,    MT_R_ALT,MT_S_CTL,MT_T_SFT,KC_G,                            KC_M,    MT_N_SFT,MT_E_CTL,MT_I_ALT,KC_O,    KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       TG_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      KC_LGUI, KC_LALT, TH_CTESC,TH_LOW,  L_GUISPC,      L_GUIENT,TH_HIGH, KC_RSFT, TH_TDALT,KC_RGUI
+                      KC_LGUI, KC_LALT, TH_CTESC,L_GUISPC,TH_LOW,        TH_HIGH, L_GUIENT, KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
     /*
@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
     * |CW_TOG|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
-    *            | LGUI | LAlt | LCTL-|LOWER | / Space /       \Enter \  |RAISE | RSFT | LAlt-| RGUI |
+    *            | LGUI | LAlt | LCTL-|Space | / LOWER /       \RAISE \  |Enter | RSFT | LAlt-| RGUI |
     *            |      |      | ESC  |      |/       /         \      \ |      |      | RAlt |      |
     *            `----------------------------------'           '------''---------------------------'
     */
@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    MT_S_ALT,MT_D_CTL,MT_F_SFT,KC_G,                            KC_H,    MT_J_SFT,MT_K_CTL,MT_L_ALT,KC_SCLN, KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       TG_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      KC_LGUI, KC_LALT, TH_CTESC,TH_LOW,  KC_SPC,        KC_ENT,  TH_HIGH, KC_RSFT, TH_TDALT,KC_RGUI
+                      KC_LGUI, KC_LALT, TH_CTESC,KC_SPC,  TH_LOW,        TH_HIGH, KC_ENT,  KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
     /* LOWER
