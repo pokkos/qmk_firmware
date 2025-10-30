@@ -52,9 +52,9 @@ tap_dance_action_t tap_dance_actions[] = {
 #define MO_HIGH MO(_RAISE)
 #define TD_ALT TD(TD_LALT_RALT)
 #define TG_ADJST TG(_ADJUST)
-#define SPC_GUI LT(_RAISE,KC_SPC)
+#define SPC_GUI LGUI_T(KC_SPC)
 #define ESC_CTL CTL_T(KC_ESC)
-#define ENT_GUI LT(_RAISE,KC_ENT)
+#define ENT_GUI LGUI_T(KC_ENT)
 #define BSC_SFT RSFT_T(KC_BSPC)
 
 // home row mods for ColemakDH
