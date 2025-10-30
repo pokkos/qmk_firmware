@@ -49,8 +49,8 @@ tap_dance_action_t tap_dance_actions[] = {
 #define TH_CTESC CTL_T(KC_ESC)
 #define TH_TDALT TD(TD_LALT_RALT)
 #define TG_ADJST TG(_ADJUST)
-#define L_GUISPC LT(_RAISE,KC_SPC)
-#define L_GUIENT LT(_RAISE,KC_ENT)
+#define SPC_GUI LT(_RAISE,KC_SPC)
+#define ENT_GUI LT(_RAISE,KC_ENT)
 
 // home row mods for ColemakDH
 #define A_GUI LGUI_T(KC_A)
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |CW_TOG|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            | LGUI | LAlt | LCTL-|Space | / LOWER /       \RAISE \  |Enter | RSFT | LAlt-| RGUI |
-    *            |      |      | ESC  |GUI_R |/       /         \       \|GUI_R |      | RAlt |      |
+    *            |      |      | ESC  |GUI   |/       /         \       \|GUI   |      | RAlt |      |
     *            `----------------------------------'           '------''---------------------------'
     */
     [_COLEMAK_DH] = LAYOUT(
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_ESC,  A_GUI,   R_ALT,   S_CTL,   T_SFT,   KC_G,                            KC_M,    N_SFT,   E_CTL,   I_ALT,   O_GUI,   KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       TG_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      KC_LGUI, KC_LALT, TH_CTESC,L_GUISPC,TH_LOW,        TH_HIGH, L_GUIENT,KC_RSFT, TH_TDALT,KC_RGUI
+                      KC_LGUI, KC_LALT, TH_CTESC,SPC_GUI, TH_LOW,        TH_HIGH, ENT_GUI, KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
     /*
@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |CW_TOG|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            | LGUI | LAlt | LCTL-|Space | / LOWER /       \RAISE \  |Enter | RSFT | LAlt-| RGUI |
-    *            |      |      | ESC  |      |/       /         \      \ |      |      | RAlt |      |
+    *            |      |      | ESC  |GUI   |/       /         \      \ |GUI   |      | RAlt |      |
     *            `----------------------------------'           '------''---------------------------'
     */
     [_QWERTY] = LAYOUT(
@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  A_GUI,   S_ALT,   D_CTL,   F_SFT,   KC_G,                            KC_H,    J_SFT,   K_CTL,   L_ALT,   SCLN_GUI,KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       TG_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      KC_LGUI, KC_LALT, TH_CTESC,KC_SPC,  TH_LOW,        TH_HIGH, KC_ENT,  KC_RSFT, TH_TDALT,KC_RGUI
+                      KC_LGUI, KC_LALT, TH_CTESC,SPC_GUI, TH_LOW,        TH_HIGH, ENT_GUI, KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
     /* LOWER
@@ -210,16 +210,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_default_layer(_QWERTY);
             }
             return false;
-        case L_GUISPC:
-        case L_GUIENT:
-            if (record->tap.count == 0) {
-                if (record->event.pressed) {
-                    register_mods(MOD_LGUI);
-                } else {
-                    unregister_mods(MOD_LGUI);
-                }
-            }
-            return true;
     }
 
     return true;
