@@ -53,20 +53,24 @@ tap_dance_action_t tap_dance_actions[] = {
 #define L_GUIENT LT(_RAISE,KC_ENT)
 
 // home row mods for ColemakDH
-#define MT_R_ALT LALT_T(KC_R)
-#define MT_S_CTL LCTL_T(KC_S)
-#define MT_T_SFT LSFT_T(KC_T)
-#define MT_N_SFT RSFT_T(KC_N)
-#define MT_E_CTL RCTL_T(KC_E)
-#define MT_I_ALT LALT_T(KC_I)
+#define A_GUI LGUI_T(KC_A)
+#define R_ALT LALT_T(KC_R)
+#define S_CTL LCTL_T(KC_S)
+#define T_SFT LSFT_T(KC_T)
+#define N_SFT RSFT_T(KC_N)
+#define E_CTL RCTL_T(KC_E)
+#define I_ALT LALT_T(KC_I)
+#define O_GUI RGUI_T(KC_O)
 
 // home row mods for qwerty
-#define MT_S_ALT LALT_T(KC_S)
-#define MT_D_CTL LCTL_T(KC_D)
-#define MT_F_SFT LSFT_T(KC_F)
-#define MT_J_SFT RSFT_T(KC_J)
-#define MT_K_CTL RCTL_T(KC_K)
-#define MT_L_ALT LALT_T(KC_L)
+#define A_GUI LGUI_T(KC_A)
+#define S_ALT LALT_T(KC_S)
+#define D_CTL LCTL_T(KC_D)
+#define F_SFT LSFT_T(KC_F)
+#define J_SFT RSFT_T(KC_J)
+#define K_CTL RCTL_T(KC_K)
+#define L_ALT LALT_T(KC_L)
+#define SCLN_GUI LGUI_T(KC_SCLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format off
@@ -77,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * | Tab  |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-    * | Esc  |   A  | R/ALT| S/CTL| T/SFT|   G  |-------.    ,-------|   M  | N/SFT| E/CTL| I/ALT|   O  |  '   |
+    * | Esc  | A/GUI| R/ALT| S/CTL| T/SFT|   G  |-------.    ,-------|   M  | N/SFT| E/CTL| I/ALT| O/GUI|  '   |
     * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
     * |CW_TOG|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -88,9 +92,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_COLEMAK_DH] = LAYOUT(
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
-    KC_ESC,  KC_A,    MT_R_ALT,MT_S_CTL,MT_T_SFT,KC_G,                            KC_M,    MT_N_SFT,MT_E_CTL,MT_I_ALT,KC_O,    KC_QUOT,
+    KC_ESC,  A_GUI,   R_ALT,   S_CTL,   T_SFT,   KC_G,                            KC_M,    N_SFT,   E_CTL,   I_ALT,   O_GUI,   KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       TG_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      KC_LGUI, KC_LALT, TH_CTESC,L_GUISPC,TH_LOW,        TH_HIGH, L_GUIENT, KC_RSFT, TH_TDALT,KC_RGUI
+                      KC_LGUI, KC_LALT, TH_CTESC,L_GUISPC,TH_LOW,        TH_HIGH, L_GUIENT,KC_RSFT, TH_TDALT,KC_RGUI
     ),
 
     /*
@@ -100,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-    * | Esc  |   A  | S/ALT| D/CTL| F/SFT|   G  |-------.    ,-------|   H  | J/SFT| K/CTL| L/ALT|   ;  |  '   |
+    * | Esc  | A/GUI| S/ALT| D/CTL| F/SFT|   G  |-------.    ,-------|   H  | J/SFT| K/CTL| L/ALT| ;/GUI|  '   |
     * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
     * |CW_TOG|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -111,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    MT_S_ALT,MT_D_CTL,MT_F_SFT,KC_G,                            KC_H,    MT_J_SFT,MT_K_CTL,MT_L_ALT,KC_SCLN, KC_QUOT,
+    KC_ESC,  A_GUI,   S_ALT,   D_CTL,   F_SFT,   KC_G,                            KC_H,    J_SFT,   K_CTL,   L_ALT,   SCLN_GUI,KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       TG_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                       KC_LGUI, KC_LALT, TH_CTESC,KC_SPC,  TH_LOW,        TH_HIGH, KC_ENT,  KC_RSFT, TH_TDALT,KC_RGUI
     ),
