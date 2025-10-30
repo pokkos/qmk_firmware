@@ -234,13 +234,26 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, RGB_GOLD);
                 break;
             case _LOWER:
-                rgb_matrix_set_color(i, RGB_TEAL);
+                if (is_layer_locked(_LOWER)) {
+                    rgb_matrix_set_color(i, 0x00, 0x2B, 0x2B); // third of RGB_TEAL
+                } else {
+                    rgb_matrix_set_color(i, RGB_TEAL);
+                }
                 break;
             case _RAISE:
+                if (is_layer_locked(_RAISE)) {
+                    oled_set_brightness(50);
+                } else {
+                    oled_set_brightness(127);
+                }
                 if (get_mods() & MOD_BIT_LGUI){
                     rgb_matrix_set_color(i, RGB_PURPLE);
                 } else {
-                    rgb_matrix_set_color(i, RGB_SPRINGGREEN);
+                    if (is_layer_locked(_RAISE)) {
+                        rgb_matrix_set_color(i, 0x00, 0x55, 0x2B); // third of RGB_SPRINGGREEN
+                    } else {
+                        rgb_matrix_set_color(i, RGB_SPRINGGREEN);
+                    }
                 }
                 break;
             case _ADJUST:
