@@ -36,6 +36,7 @@ enum sofle_layers {
 enum custom_keycodes {
     KC_COLE = SAFE_RANGE,
     KC_QWER,
+    KC_ADJST,
     KC_UM_A,
     KC_UM_O,
     KC_UM_U,
@@ -54,7 +55,6 @@ tap_dance_action_t tap_dance_actions[] = {
 #define MO_LOW MO(_LOWER)
 #define MO_HIGH MO(_RAISE)
 #define TD_ALT TD(TD_LALT_RALT)
-#define TG_ADJST TG(_ADJUST)
 #define SPC_GUI LGUI_T(KC_SPC)
 #define ESC_CTL CTL_T(KC_ESC)
 #define ENT_GUI LGUI_T(KC_ENT)
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
     KC_ESC,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_TAB,  A_GUI,   R_ALT,   S_CTL,   T_SFT,   KC_G,                            KC_M,    N_SFT,   E_CTL,   I_ALT,   O_GUI,   KC_QUOT,
-    CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       TG_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
+    CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       KC_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
                       KC_LGUI, KC_LALT, ESC_CTL, SPC_GUI, MO_LOW,        MO_HIGH, ENT_GUI, BSC_SFT, TD_ALT,  KC_RGUI
     ),
 
@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
     KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_TAB,  A_GUI,   S_ALT,   D_CTL,   F_SFT,   KC_G,                            KC_H,    J_SFT,   K_CTL,   L_ALT,   SCLN_GUI,KC_QUOT,
-    CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       TG_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
+    CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       KC_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
                       KC_LGUI, KC_LALT, ESC_CTL, SPC_GUI, MO_LOW,        MO_HIGH, ENT_GUI, BSC_SFT, TD_ALT,  KC_RGUI
     ),
 
@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_COLE, KC_QWER, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     RM_PREV, RM_NEXT, RM_TOGG, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG_ADJST,      TG_ADJST,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ADJST,      KC_ADJST,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
     ),
     // clang-format on
@@ -210,12 +210,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_COLE:
             if (record->event.pressed) {
+                oled_clear();
                 set_single_default_layer(_COLEMAK_DH);
             }
             return false;
         case KC_QWER:
             if (record->event.pressed) {
+                oled_clear();
                 set_single_default_layer(_QWERTY);
+            }
+            return false;
+        case KC_ADJST:
+            if (record->event.pressed) {
+                oled_clear();
+                layer_invert(_ADJUST);
             }
             return false;
         case KC_UM_A:
@@ -346,16 +354,17 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 
     static void render_right(void) {
+        if (IS_LAYER_ON(_ADJUST)) {
+            oled_clear();
+            return;
+        }
+
         print_base();
         oled_write_P(PSTR("\n"), false);
         print_layer();
         oled_write_P(PSTR("\n"), false);
+        print_mods();
 
-        if (IS_LAYER_OFF(_ADJUST)) {
-            print_mods();
-        } else {
-            print_adjust();
-        }
     }
 
     static void print_base(void) {
@@ -418,14 +427,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             char buffer[12];
             sprintf(buffer, "DT: %d", g_tapping_term);
             oled_write_ln_P(PSTR(buffer), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
     }
 
     static void render_logo(void) {
