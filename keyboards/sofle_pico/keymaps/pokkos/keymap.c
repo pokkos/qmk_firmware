@@ -256,11 +256,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 }
                 break;
             case _RAISE:
-                if (is_layer_locked(_RAISE)) {
-                    oled_set_brightness(50);
-                } else {
-                    oled_set_brightness(127);
-                }
                 if (get_mods() & MOD_BIT_LGUI){
                     rgb_matrix_set_color(i, RGB_PURPLE);
                 } else {
