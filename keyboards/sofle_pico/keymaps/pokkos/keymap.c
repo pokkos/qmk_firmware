@@ -19,6 +19,10 @@
     static void render_logo(void);
     static void render_right(void);
     static void render_left(void);
+    static void print_base(void);
+    static void print_layer(void);
+    static void print_mods(void);
+    static void print_adjust(void);
 #endif
 
 enum sofle_layers {
@@ -329,10 +333,34 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 
     static void render_left(void) {
-        /* Print current mode */
+        print_base();
+        oled_write_P(PSTR("\n"), false);
+        print_layer();
+        oled_write_P(PSTR("\n"), false);
+
+        if (IS_LAYER_OFF(_ADJUST)) {
+            print_mods();
+        } else {
+            print_adjust();
+        }
+    }
+
+    static void render_right(void) {
+        print_base();
+        oled_write_P(PSTR("\n"), false);
+        print_layer();
+        oled_write_P(PSTR("\n"), false);
+
+        if (IS_LAYER_OFF(_ADJUST)) {
+            print_mods();
+        } else {
+            print_adjust();
+        }
+    }
+
+    static void print_base(void) {
         oled_write_ln_P(PSTR("Base"), false);
 
-        /* print base layer */
         switch (get_highest_layer(default_layer_state)) {
             case _COLEMAK_DH:
                 oled_write_P(PSTR("COLEMAK_DH"), false); //no newline as the line is full with 10 chars
@@ -344,10 +372,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
                 oled_write_ln_P(PSTR("Undefined"), false);
                 break;
         }
+    }
 
-        oled_write_P(PSTR("\n"), false);
-
-        /* print current layer */
+    static void print_layer(void) {
         oled_write_ln_P(PSTR("Layer"), false);
 
         switch (get_highest_layer(layer_state)) {
@@ -367,30 +394,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             default:
                 oled_write_ln_P(PSTR("UNDEFINED"), false);
         }
-
-        oled_write_P(PSTR("\n"), false);
-
-        if (IS_LAYER_OFF(_ADJUST)) {
-            render_right();
-        } else {
-            char buffer[12];
-            sprintf(buffer, "DT: %d", g_tapping_term);
-            oled_write_ln_P(PSTR(buffer), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-            oled_write_ln_P(PSTR(""), false);
-        }
-
     }
 
-    static void render_right(void) {
+    static void print_mods(void) {
         uint8_t current_mods = get_mods();
-        /* print capslock state */
         oled_write_ln_P(PSTR("Caps-Word"), is_caps_word_on());
 
         oled_write("SFT", (current_mods & MOD_BIT_LSHIFT));
@@ -405,6 +412,20 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         oled_write("GUI", (current_mods & MOD_BIT_LGUI));
         oled_write("    ", false);
         oled_write("GUI", (current_mods & MOD_BIT_RGUI));
+    }
+
+    static void print_adjust(void) {
+            char buffer[12];
+            sprintf(buffer, "DT: %d", g_tapping_term);
+            oled_write_ln_P(PSTR(buffer), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
+            oled_write_ln_P(PSTR(""), false);
     }
 
     static void render_logo(void) {
