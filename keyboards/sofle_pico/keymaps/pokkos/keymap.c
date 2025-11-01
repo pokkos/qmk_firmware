@@ -19,7 +19,6 @@
     static void render_logo(void);
     static void render_right(void);
     static void render_left(void);
-    static void oled_render_boot(bool bootloader);
 #endif
 
 enum sofle_layers {
@@ -282,13 +281,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-bool shutdown_user(bool jump_to_bootloader) {
-    #ifdef OLED_ENABLE
-        oled_render_boot(jump_to_bootloader);
-    #endif
-    return true;
-}
-
 // layer_state_t layer_state_set_user(layer_state_t state) {
 //   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 // }
@@ -334,18 +326,6 @@ bool shutdown_user(bool jump_to_bootloader) {
         }
 
         return false;
-    }
-
-    static void oled_render_boot(bool bootloader) {
-        oled_clear();
-        for (int i = 0; i < oled_max_lines(); i++) {
-            oled_set_cursor(0, i);
-            if (bootloader) {
-                oled_write_P(PSTR("Awaiting new firmware"), false);
-            } else {
-                oled_write_P(PSTR("Rebooting"), false);
-            }
-        }
     }
 
     static void render_left(void) {
