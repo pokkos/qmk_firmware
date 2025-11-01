@@ -16,11 +16,9 @@
         "console": false,
         "encoder": true,
         "extrakey": true,
-        "mousekey": true,
         "nkro": true,
         "oled": true,
         "rgb_matrix": true,
-        "wpm": true,
         "dynamic_tapping_term": true
     },
     "matrix_pins": {
