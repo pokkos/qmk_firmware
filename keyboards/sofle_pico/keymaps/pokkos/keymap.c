@@ -307,7 +307,7 @@ bool shutdown_user(bool jump_to_bootloader) {
 
     bool oled_task_user(void) {
         static bool finished_logo = false;
-        if ((timer_elapsed(startup_timer) < OLED_LOGO_TIMEOUT) && !finished_logo) {
+        if (!finished_logo) {
             /* Display the logo on startup */
             if (is_keyboard_master()) {
                 render_logo();
@@ -319,13 +319,13 @@ bool shutdown_user(bool jump_to_bootloader) {
             } else {
                 render_logo();
             }
-        } else {
-            /* Display the current keyboard state */
-            if (!finished_logo) {
-                finished_logo = true;
+
+            if (timer_elapsed(startup_timer) > OLED_LOGO_TIMEOUT) {
+                finished_logo = TRUE;
                 oled_clear();
             }
-
+        } else {
+            /* Display the current keyboard state */
             if (is_keyboard_master()) {
                 render_left();
             } else {
