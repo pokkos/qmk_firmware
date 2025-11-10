@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |      |   |  |   /  |   \  |   +  |   ?  |-------.    ,-------|   _  |   -  |   =  |   {  |   }  |      |
     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
-    * |   ß  |   ä  |   ö  |   ü  |   ~  |      |-------|    |-------|      |   <  |   >  |   [  |   ]  |      |
+    * |      |   ß  |   ä  |   ö  |   ü  |   ~  |-------|    |-------|      |   <  |   >  |   [  |   ]  |      |
     * `-----------------------------------------/       /     \      \-----------------------------------------'
     *            |      |      |      |      | /       /       \ LOCK \  |      |      |      |      |
     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                           KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
     _______, KC_PIPE, KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES,                         KC_UNDS, KC_MINS, KC_EQL,  KC_LCBR, KC_RCBR, _______,
-    KC_SS,   KC_UM_A, KC_UM_O, KC_UM_U, KC_TILD, _______, _______,       _______, _______, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC, _______,
+    _______, KC_SS,   KC_UM_A, KC_UM_O, KC_UM_U, KC_TILD, _______,        _______, _______, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC, _______,
                       _______, _______, _______, _______, _______,       QK_LLCK, _______, _______, _______, _______
     ),
 
