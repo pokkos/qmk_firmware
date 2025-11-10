@@ -31,12 +31,14 @@ enum sofle_layers {
     _LOWER,
     _RAISE,
     _ADJUST,
+    _GAMING,
 };
 
 enum custom_keycodes {
     KC_COLE = SAFE_RANGE,
     KC_QWER,
     KC_ADJST,
+    KC_GAME,
     KC_UM_A,
     KC_UM_O,
     KC_UM_U,
@@ -172,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* ADJUST
     * ,-----------------------------------------.                    ,-----------------------------------------.
-    * |COLEMK|QWERTY|      |      |      |QK_BOT|                    |      |      |      |      |      |      |
+    * |COLEMK|QWERTY|GAMING|      |      |QK_BOT|                    |      |      |      |      |      |      |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |RGB_P |RGB_N |RGB_T |      |      |      |                    |      |      |      |      |      |      |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -185,11 +187,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *            `----------------------------------'           '------''---------------------------'
     */
     [_ADJUST] = LAYOUT(
-    KC_COLE, KC_QWER, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    KC_COLE, KC_QWER, KC_GAME, XXXXXXX, XXXXXXX, QK_BOOT,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     RM_PREV, RM_NEXT, RM_TOGG, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ADJST,      KC_ADJST,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
+    ),
+
+    /*
+    * GAMING
+    * ,-----------------------------------------.                    ,-----------------------------------------.
+    * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  | Del  |
+    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+    * | Esc  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
+    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+    * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+    * |------+------+------+------+------+------|  MUTE |    | ADJST |------+------+------+------+------+------|
+    * |LShft |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |      |
+    * `-----------------------------------------/       /     \      \-----------------------------------------'
+    *            |      | LAlt |LOWER |Space | /  Esc  /       \ Bsbc \  |Enter |RAISE | LAlt-|      |
+    *            |      |      |      |      |/       /         \      \ |GUI   |      | RAlt |      |
+    *            `----------------------------------'           '------''---------------------------'
+    */
+    [_GAMING] = LAYOUT(
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
+    KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                            KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       KC_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
+                      XXXXXXX, KC_LALT, MO_LOW,  KC_SPC,  KC_ESC,        KC_BSPC, ENT_GUI, MO_HIGH, TD_ALT,  XXXXXXX
     ),
     // clang-format on
 };
@@ -201,6 +226,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_LOWER] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
     [_RAISE] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(_______, _______) },
     [_ADJUST] = { ENCODER_CCW_CW(DT_DOWN, DT_UP), ENCODER_CCW_CW(KC_BRIU, KC_BRID) },
+    [_GAMING] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
 };
 #endif
 
@@ -216,6 +242,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 oled_clear();
                 set_single_default_layer(_QWERTY);
+            }
+            return false;
+        case KC_GAME:
+            if (record->event.pressed) {
+                oled_clear();
+                set_single_default_layer(_GAMING);
             }
             return false;
         case KC_ADJST:
