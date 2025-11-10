@@ -403,6 +403,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             case _QWERTY:
                 oled_write_ln_P(PSTR("QWERTY"), false);
                 break;
+            case _GAMING:
+                oled_write_ln_P(PSTR("GAMING"), false);
+                break;
             default:
                 oled_write_ln_P(PSTR("Undefined"), false);
                 break;
