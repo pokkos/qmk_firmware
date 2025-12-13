@@ -175,7 +175,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* RAISE
     * ,----------------------------------------.                    ,-----------------------------------------.
-    * |      | Calc |      |      |      |      |                    | Play |      |      |      |      |      |
+    * |      | Calc |      |      |      |      |                    |      |M-Prev| M-Tog|M-Next|      |      |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |      |      |      | Menu |      |      |                    |      | PgUp | PgDwn|      |      | Ins  |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *            `----------------------------------'           '------''---------------------------'
     */
     [_RAISE] = LAYOUT(
-    XXXXXXX, KC_CALC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         KC_MPLY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_CALC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX,                         XXXXXXX, KC_PGUP, KC_PGDN, XXXXXXX, XXXXXXX, KC_INS,
     XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, KC_DEL,
     KC_CAPS, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, KC_HOME, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX,
