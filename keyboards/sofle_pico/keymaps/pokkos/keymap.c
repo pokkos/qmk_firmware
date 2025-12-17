@@ -53,6 +53,12 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_LALT_RALT] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_RALT),
 };
 
+const key_override_t backspace_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+
+const key_override_t *key_overrides[] = {
+    &backspace_key_override
+};
+
 // define mod keys
 #define MO_LOW MO(_LOWER)
 #define MO_HIGH MO(_RAISE)
