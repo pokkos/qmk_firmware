@@ -184,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * ,----------------------------------------.                    ,-----------------------------------------.
     * |      | Calc |      |      |      |      |                    |      |M-Prev| M-Tog|M-Next|      |      |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-    * |      |      |      | Menu |      |      |                    |      | PgUp | PgDwn|      |      | Ins  |
+    * |      |      |      | Menu |      |      |                    |      | PgDwn| PgUp |      |      | Ins  |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |      | LGui | LAlt | LCtl |LShift|      |-------.    ,-------| Left | Down |  Up  | Right| Bspc | Del  |
     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -303,21 +303,13 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, RGB_GOLD);
                 break;
             case _LOWER:
-                if (is_layer_locked(_LOWER)) {
-                    rgb_matrix_set_color(i, 0x00, 0x2B, 0x2B); // third of RGB_TEAL
-                } else {
-                    rgb_matrix_set_color(i, RGB_TEAL);
-                }
+                rgb_matrix_set_color(i, RGB_TEAL);
                 break;
             case _RAISE:
-                if (get_mods() & MOD_BIT_LGUI){
+                if (get_mods() & MOD_BIT_LGUI) {
                     rgb_matrix_set_color(i, RGB_PURPLE);
                 } else {
-                    if (is_layer_locked(_RAISE)) {
-                        rgb_matrix_set_color(i, 0x00, 0x55, 0x2B); // third of RGB_SPRINGGREEN
-                    } else {
-                        rgb_matrix_set_color(i, RGB_SPRINGGREEN);
-                    }
+                    rgb_matrix_set_color(i, RGB_SPRINGGREEN);
                 }
                 break;
             case _ADJUST:
