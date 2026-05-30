@@ -128,7 +128,7 @@
     },
     "tags": [ "ortho", "split", "rgb", "encoder", "OLED", "128x64", "tenting_puck" ],
     "tapping": {
-        "term": 210,
+        "term": 300,
         "term_per_key": true,
         "permissive_hold": true
     },
