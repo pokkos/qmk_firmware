@@ -11,6 +11,7 @@
 #define SERIAL_USART_PIN_SWAP
 
 #define QUICK_TAP_TERM 10
+#define CAPS_WORD_INVERT_ON_SHIFT
 
 /* I2C for OLEDs */
 #define I2C_DRIVER I2CD1
