@@ -10,7 +10,7 @@
 /* Swap TX and RX pins if keyboard is master half. Only available on some MCU's. This _is_ available on the RP2040 */
 #define SERIAL_USART_PIN_SWAP
 
-#define QUICK_TAP_TERM 10
+#define QUICK_TAP_TERM 100
 #define CAPS_WORD_INVERT_ON_SHIFT
 
 /* I2C for OLEDs */
