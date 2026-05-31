@@ -29,10 +29,6 @@ enum custom_keycodes {
     KC_QWER,
     KC_ADJST,
     KC_GAME,
-    KC_UM_A,
-    KC_UM_O,
-    KC_UM_U,
-    KC_SS,
     KC_EURO,
 };
 
@@ -243,12 +239,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_COLEMAK_DH] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_RIGHT, KC_LEFT) },
-    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_RIGHT, KC_LEFT) },
-    [_GAMING] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(_______, _______) },
-    [_LOWER] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
-    [_RAISE] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(_______, _______) },
-    [_NUMPAD] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
-    [_ADJUST] = { ENCODER_CCW_CW(DT_DOWN, DT_UP), ENCODER_CCW_CW(KC_BRIU, KC_BRID) },
+    [_QWERTY]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_RIGHT, KC_LEFT) },
+    [_GAMING]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(_______, _______) },
+    [_LOWER]      = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
+    [_RAISE]      = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(_______, _______) },
+    [_NUMPAD]     = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
+    [_ADJUST]     = { ENCODER_CCW_CW(DT_DOWN, DT_UP),   ENCODER_CCW_CW(KC_BRIU, KC_BRID) },
 };
 #endif
 
@@ -289,26 +285,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 oled_clear();
                 layer_invert(_ADJUST);
-            }
-            return false;
-        case KC_UM_A:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("a"));
-            }
-            return false;
-        case KC_UM_O:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("o"));
-            }
-            return false;
-        case KC_UM_U:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("u"));
-            }
-            return false;
-        case KC_SS:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("s"));
             }
             return false;
         case KC_EURO:
