@@ -2,17 +2,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <stdint.h>
-#include "action.h"
-#include "action_layer.h"
-#include "action_tapping.h"
-#include "action_util.h"
-#include "color.h"
-#include "keyboard.h"
-#include "keycodes.h"
-#include "modifiers.h"
-#include "oled_driver.h"
-#include "quantum.h"
-#include "rgb_matrix.h"
 #include QMK_KEYBOARD_H
 
 #ifdef OLED_ENABLE
