@@ -31,6 +31,7 @@ enum sofle_layers {
     _GAMING,
     _LOWER,
     _RAISE,
+    _NUMPAD,
     _ADJUST,
 };
 
@@ -63,6 +64,7 @@ const key_override_t *key_overrides[] = {
 // define mod keys
 #define MO_LOW MO(_LOWER)
 #define MO_HIGH MO(_RAISE)
+#define TG_NUM TG(_NUMPAD)
 #define TD_ALT TD(TD_LALT_RALT)
 #define SPC_GUI LGUI_T(KC_SPC)
 #define ENT_GUI LGUI_T(KC_ENT)
@@ -92,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
     * COLEMAK_DH
     * ,-----------------------------------------.                    ,-----------------------------------------.
-    * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
+    * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  | NUM  |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |      |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  |  -   |
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -105,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *            `----------------------------------'           '------''---------------------------'
     */
     [_COLEMAK_DH] = LAYOUT(
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    TG_NUM,
     QK_LEAD, KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
     KC_TAB,  A_GUI,   R_ALT,   S_CTL,   T_SFT,   KC_G,                            KC_M,    N_SFT,   E_CTL,   I_ALT,   O_GUI,   KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MUTE,       KC_ADJST,KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
@@ -128,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *            `----------------------------------'           '------''---------------------------'
     */
     [_QWERTY] = LAYOUT(
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
     XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
     KC_TAB,  A_GUI,   S_ALT,   D_CTL,   F_SFT,   KC_G,                            KC_H,    J_SFT,   K_CTL,   L_ALT,   SCLN_GUI,KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,       KC_ADJST,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
@@ -202,6 +204,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _______, _______, _______, _______, QK_LLCK,       _______, _______, _______, _______, _______
     ),
 
+    /* NUMPAD
+    * ,----------------------------------------.                    ,-----------------------------------------.
+    * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+    * |      |      |      |      |      |      |                    |  ^   |  7   |  8   |  9   |  (   |  )   |
+    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+    * |      |      |      |  $   |  €   |      |-------.    ,-------|  +   |  4   |  5   |  6   |  *   |      |
+    * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+    * |      |      |      |      |      |      |-------|    |-------|  -   |  1   |  2   |  3   |  /   |  \   |
+    * `-----------------------------------------/       /     \      \-----------------------------------------'
+    *            |      |      |      |      | /       /       \      \  |      |  0   |  ,   |  .   |
+    *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+    *            `----------------------------------'           '------''---------------------------'
+    */
+    [_NUMPAD] = LAYOUT(
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         KC_CIRC, KC_7,    KC_8,    KC_9,    KC_LPRN, KC_RPRN,
+    XXXXXXX, XXXXXXX, XXXXXXX, KC_DLR,  KC_EURO, XXXXXXX,                         KC_PLUS, KC_4,    KC_5,    KC_6,    KC_ASTR, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, KC_MINS, KC_1,    KC_2,    KC_3,    KC_SLSH, KC_BSLS,
+                      _______, _______, _______, _______, _______,       KC_BSPC, KC_ENT,  KC_0,    KC_COMM, KC_DOT
+    ),
+
     /* ADJUST
     * ,-----------------------------------------.                    ,-----------------------------------------.
     * |COLEMK|QWERTY|GAMING|      |      |QK_BOT|                    |      |      |      |      |      |      |
@@ -234,11 +258,35 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_GAMING] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(_______, _______) },
     [_LOWER] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
     [_RAISE] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(_______, _______) },
+    [_NUMPAD] = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
     [_ADJUST] = { ENCODER_CCW_CW(DT_DOWN, DT_UP), ENCODER_CCW_CW(KC_BRIU, KC_BRID) },
 };
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (get_highest_layer(layer_state) == _NUMPAD) {
+        switch (keycode) {
+            case KC_1 ... KC_0:
+            case KC_BSPC:
+            case KC_COMM:
+            case KC_DOT:
+            case KC_PLUS:
+            case KC_MINS:
+            case KC_ASTR:
+            case KC_SLSH:
+            case KC_BSLS:
+            case KC_CIRC:
+            case KC_LPRN:
+            case KC_RPRN:
+            case KC_EURO:
+            case KC_DLR:
+                break;
+            default:
+                layer_invert(_NUMPAD);
+                break;
+        }
+    }
+
     switch (keycode) {
         case KC_COLE:
             if (record->event.pressed) {
@@ -296,6 +344,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     uint8_t layer = get_highest_layer(layer_state);
+
+    if (layer == _NUMPAD) {
+        for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+            for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+                uint8_t index = g_led_config.matrix_co[row][col];
+
+                if (   index >= led_min
+                    && index < led_max
+                    && index != NO_LED
+                    && keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS
+                   ) {
+                    rgb_matrix_set_color(index, RGB_MAGENTA);
+                }
+            }
+        }
+    }
 
     for (uint8_t i = led_min; i < led_max; i++) {
         switch (layer) {
@@ -444,6 +508,9 @@ void leader_end_user(void) {
                 break;
             case _LOWER:
                 oled_write_ln_P(PSTR("LOWER"), is_layer_locked(_LOWER));
+                break;
+            case _NUMPAD:
+                oled_write_ln_P(PSTR("NUMPAD"), false);
                 break;
             case _ADJUST:
                 oled_write_ln_P(PSTR("ADJUST"), true);
