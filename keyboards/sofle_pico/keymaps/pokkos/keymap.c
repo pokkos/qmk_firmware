@@ -363,18 +363,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     for (uint8_t i = led_min; i < led_max; i++) {
         switch (layer) {
-            case _QWERTY:
-                rgb_matrix_set_color(i, RGB_GOLD);
-                break;
             case _LOWER:
-                rgb_matrix_set_color(i, RGB_TEAL);
+                rgb_matrix_set_color(i, RGB_PURPLE);
                 break;
             case _RAISE:
-                if (get_mods() & MOD_BIT_LGUI) {
-                    rgb_matrix_set_color(i, RGB_PURPLE);
-                } else {
-                    rgb_matrix_set_color(i, RGB_SPRINGGREEN);
-                }
+                rgb_matrix_set_color(i, RGB_AZURE);
                 break;
             case _ADJUST:
                 rgb_matrix_set_color(i, RGB_RED);
