@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * ,-----------------------------------------.                                ,-----------------------------------------.
     * |  `   |   1  |   2  |   3  |   4  |   5  |                                |   6  |   7  |   8  |   9  |   0  | NUM  |
     * |------+------+------+------+------+------|                                |------+------+------+------+------+------|
-    * |      |   Q  |   W  |   F  |   P  |   B  |                                |   J  |   L  |   U  |   Y  |   ;  |  -   |
+    * | LEAD |   Q  |   W  |   F  |   P  |   B  |                                |   J  |   L  |   U  |   Y  |   ;  |  -   |
     * |------+------+------+------+------+------|                                |------+------+------+------+------+------|
     * | Tab  | A/GUI| R/ALT| S/CTL| T/SFT|   G  |-------.                ,-------|   M  | N/SFT| E/CTL| I/ALT| O/GUI|  '   |
     * |------+------+------+------+------+------|  MUTE |                | ADJST |------+------+------+------+------+------|
@@ -208,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         KC_CIRC, KC_7,    KC_8,    KC_9,    KC_LPRN, KC_RPRN,
     KC_TAB,  XXXXXXX, XXXXXXX, KC_DLR,  KC_EURO, XXXXXXX,                         KC_PLUS, KC_4,    KC_5,    KC_6,    KC_ASTR, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, KC_MINS, KC_1,    KC_2,    KC_3,    KC_SLSH, KC_BSLS,
-                      XXXXXXX, XXXXXXX, XXXXXXX, SPC_GUI, KC_ESC,        KC_BSPC, KC_ENT,  KC_0,    KC_COMM, KC_DOT
+                      XXXXXXX, XXXXXXX, XXXXXXX, SPC_GUI, KC_ESC,        KC_BSPC, ENT_GUI, KC_0,    KC_COMM, KC_DOT
     ),
 
     /* ADJUST
@@ -252,6 +252,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (get_highest_layer(layer_state) == _NUMPAD && record->event.pressed) {
         switch (keycode) {
             case SPC_GUI:
+            case ENT_GUI:
+            case KC_TAB:
             case KC_ESC:
                 layer_invert(_NUMPAD);
                 return true;
