@@ -337,6 +337,9 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case ENT_GUI:
+        case SPC_GUI:
+            return 200;
         default:
             return g_tapping_term;
     }
